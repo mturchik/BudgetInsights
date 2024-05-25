@@ -28,9 +28,6 @@ jobs:
           node-version: 20
           cache: "npm"
 
-      # Move to the app directory
-      - run: cd BudgetInsights.App
-
       - run: npm ci
       - uses: nrwl/nx-set-shas@v4
 
