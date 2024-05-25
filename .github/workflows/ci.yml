@@ -13,16 +13,10 @@ permissions:
 jobs:
   main:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: BudgetInsights.App
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-
-      # Move to the app directory
-      # - run: cd BudgetInsights.App
 
       # Connect your workspace on nx.app and uncomment this to enable task distribution.
       # The "--stop-agents-after" is optional, but allows idle agents to shut down once the "e2e-ci" targets have been requested
