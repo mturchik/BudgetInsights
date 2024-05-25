@@ -34,5 +34,5 @@ jobs:
       # This line is needed for nx affected to work when CI is running on a PR
       - run: git branch --track master origin/master
 
-      - run: pnpm nx affected -t lint,test,build --parallel=3 --configuration=ci
-      - run: pnpm nx affected -t e2e --parallel=1
+      - run: npx nx affected -t lint,test,build --parallel=3 --configuration=ci
+      - run: npx nx affected -t e2e --parallel=1
