@@ -18,29 +18,12 @@ jobs:
         with:
           fetch-depth: 0
 
-      - uses: pnpm/action-setup@v2
+      - uses: actions/setup-node@v3
         with:
-          version: 8
+          node-version: 20
+          cache: 'npm'
 
-      - name: Restore cached npm dependencies
-        id: cache-dependencies-restore
-        uses: actions/cache/restore@v3
-        with:
-          path: |
-            node_modules
-            ~/.cache/Cypress # needed for the Cypress binary
-          key: npm-dependencies-${{ hashFiles('pnpm-lock.yaml') }}
-
-      - run: pnpm install --frozen-lockfile
-
-      - name: Cache npm dependencies
-        id: cache-dependencies-save
-        uses: actions/cache/save@v3
-        with:
-          path: |
-            node_modules
-            ~/.cache/Cypress # needed for the Cypress binary
-          key: ${{ steps.cache-dependencies-restore.outputs.cache-primary-key }}
+      - run: npm ci
 
       # Connect your workspace on nx.app and uncomment this to enable task distribution.
       # The "--stop-agents-after" is optional, but allows idle agents to shut down once the "e2e-ci" targets have been requested
