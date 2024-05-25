@@ -18,6 +18,9 @@ jobs:
         with:
           fetch-depth: 0
 
+      # Move to the app directory
+      - run: cd BudgetInsights.App
+
       # Connect your workspace on nx.app and uncomment this to enable task distribution.
       # The "--stop-agents-after" is optional, but allows idle agents to shut down once the "e2e-ci" targets have been requested
       - run: npx nx-cloud start-ci-run --distribute-on="5 linux-medium-js" --stop-agents-after="e2e-ci"
@@ -27,9 +30,6 @@ jobs:
         with:
           node-version: 20
           cache: "npm"
-
-      # Move to the app directory
-      - run: cd BudgetInsights.App
 
       - run: npm ci
       - uses: nrwl/nx-set-shas@v4
