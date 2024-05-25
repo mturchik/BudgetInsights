@@ -10,6 +10,9 @@ permissions:
   actions: read
   contents: read
 
+env:
+  main_branch_name: master
+
 jobs:
   main:
     runs-on: ubuntu-latest
