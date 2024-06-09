@@ -1,0 +1,12 @@
+form {
+  label.form-label {
+    color: var(--bs-secondary);
+    font-size: 0.95rem;
+    font-weight: bold;
+    margin-bottom: 0;
+    margin-left: 0.5rem;
+    &:hover {
+      color: var(--bs-primary);
+    }
+  }
+}

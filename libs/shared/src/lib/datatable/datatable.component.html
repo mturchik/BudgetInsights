@@ -1,0 +1,26 @@
+<table
+  class="table table-bordered border-secondary table-striped table-hover table-responsive"
+  *ngIf="headers.length && records.length; else noData">
+  <thead>
+    <tr>
+      <th scope="col" biSortable="#" (sort)="onSort($event)">#</th>
+      <th
+        *ngFor="let header of headers"
+        scope="col"
+        [biSortable]="header"
+        (sort)="onSort($event)">
+        {{ header }}
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let record of records; let i = index">
+      <td scope="row">{{ i + 1 }}</td>
+      <td *ngFor="let header of headers">{{ record[header] }}</td>
+    </tr>
+  </tbody>
+</table>
+<ng-template #noData>
+  <p class="text-center text-muted">No data available</p>
+  <p class="text-center text-muted">Please add some data to see it here.</p>
+</ng-template>

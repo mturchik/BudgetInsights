@@ -22,7 +22,10 @@
             "input": "apps/BudgetInsights/public"
           }
         ],
-        "styles": ["apps/BudgetInsights/src/styles.scss"],
+        "styles": [
+          "apps/BudgetInsights/src/styles.scss",
+          "libs/shared/src/lib/styles/styles.scss"
+        ],
         "scripts": [],
         "server": "apps/BudgetInsights/src/main.server.ts",
         "prerender": true,

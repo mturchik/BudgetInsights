@@ -1,0 +1,12 @@
+<div class="row">
+  <div class="col-6">
+    <form [formGroup]="form">
+      <bi-file-selector formControlName="files" />
+    </form>
+  </div>
+</div>
+<div class="row" *ngIf="form.valid && form.value.files?.item(0) as file">
+  <div class="col-12">
+    <bi-workbook-sheet [file]="file" />
+  </div>
+</div>

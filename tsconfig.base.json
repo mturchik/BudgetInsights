@@ -14,7 +14,12 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@budget-insights/home": ["libs/home/src/index.ts"],
+      "@budget-insights/shared": ["libs/shared/src/index.ts"],
+      "@budget-insights/shell": ["libs/shell/src/index.ts"],
+      "@budget-insights/workbook": ["libs/workbook/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
