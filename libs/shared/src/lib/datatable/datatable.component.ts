@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
-import { SortableDirective, SortEvent } from './sortable/sortable.directive';
+import { SortEvent, SortableDirective } from './sortable/sortable.directive';
 
 @Component({
   selector: 'bi-datatable',
@@ -12,8 +12,9 @@ import { SortableDirective, SortEvent } from './sortable/sortable.directive';
 export class DatatableComponent {
   @Input() headers: string[] = [];
   @Input() records: Record<string, string>[] = [];
+  sortEvent: SortEvent = { column: '#', direction: 'asc' };
 
-  onSort(event: SortEvent) {
-    console.log(event);
+  onSort(sortEvent: SortEvent) {
+    this.sortEvent = sortEvent;
   }
 }

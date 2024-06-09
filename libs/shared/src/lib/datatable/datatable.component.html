@@ -3,13 +3,22 @@
   *ngIf="headers.length && records.length; else noData">
   <thead>
     <tr>
-      <th scope="col" biSortable="#" (sort)="onSort($event)">#</th>
+      <th
+        scope="col"
+        class="text-nowrap"
+        biSortable="#"
+        [direction]="sortEvent.column === '#' ? sortEvent.direction : ''"
+        (sort$)="onSort($event)">
+        <span class="me-3">#</span>
+      </th>
       <th
         *ngFor="let header of headers"
         scope="col"
+        class="text-nowrap"
         [biSortable]="header"
-        (sort)="onSort($event)">
-        {{ header }}
+        [direction]="sortEvent.column === header ? sortEvent.direction : ''"
+        (sort$)="onSort($event)">
+        <span class="me-3">{{ header }}</span>
       </th>
     </tr>
   </thead>
