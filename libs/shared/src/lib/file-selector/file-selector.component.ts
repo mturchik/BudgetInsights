@@ -28,6 +28,7 @@ import {
 export class FileSelectorComponent implements ControlValueAccessor {
   @Input() id = 'file-selector';
   @Input() label = 'File Selector';
+  @Input() size: 'sm' | 'md' | 'lg' = 'md';
   @Input() accept: FileAcceptType[] = [FileAcceptType.CSV];
   @Input() multiple = false;
   @ViewChild('fileInput') fileInput?: ElementRef<HTMLInputElement>;

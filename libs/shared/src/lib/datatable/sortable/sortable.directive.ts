@@ -42,6 +42,7 @@ export class SortableDirective implements OnInit, OnChanges {
   initSortIcon() {
     this._sortIcon = this._renderer.createElement('i');
     this._renderer.addClass(this._sortIcon, 'bi');
+    this._renderer.addClass(this._sortIcon, 'ms-2');
     this._renderer.appendChild(this._el.nativeElement, this._sortIcon);
 
     this._renderer.addClass(this._el.nativeElement, 'sortable');
@@ -54,8 +55,8 @@ export class SortableDirective implements OnInit, OnChanges {
   updateSortIcon() {
     this._renderer.removeClass(this._sortIcon, 'bi-chevron-double-up');
     this._renderer.removeClass(this._sortIcon, 'bi-chevron-double-down');
-    this._renderer.removeClass(this._sortIcon, 'bi-chevron-left');
-    this._renderer.addClass(this._sortIcon, this.getSortClass());
+    const sortClass = this.getSortClass();
+    if (sortClass) this._renderer.addClass(this._sortIcon, sortClass);
   }
 
   rotate() {
@@ -80,6 +81,6 @@ export class SortableDirective implements OnInit, OnChanges {
       ? 'bi-chevron-double-up'
       : this.direction === 'desc'
       ? 'bi-chevron-double-down'
-      : 'bi-chevron-left';
+      : '';
   }
 }

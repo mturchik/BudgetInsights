@@ -1,9 +1,13 @@
-<label [for]="id" class="form-label">{{ label }}</label>
+<label [for]="id" class="form-label" [class.fs-5]="size === 'lg'">
+  {{ label }}
+</label>
 <div class="input-group">
   <input
     #fileInput
     [id]="id"
     class="form-control"
+    [class.form-control-sm]="size === 'sm'"
+    [class.form-control-lg]="size === 'lg'"
     type="file"
     [accept]="accept.join(',')"
     [multiple]="multiple"
@@ -11,6 +15,8 @@
     (change)="onFileSelected()" />
   <button
     class="btn btn-outline-primary"
+    [class.btn-sm]="size === 'sm'"
+    [class.btn-lg]="size === 'lg'"
     type="button"
     [disabled]="disabled"
     (click)="fileInput.click()">

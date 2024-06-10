@@ -1,34 +1,73 @@
-<table
-  class="table table-bordered border-secondary table-striped table-hover table-responsive"
-  *ngIf="headers.length && records.length; else noData">
-  <thead>
-    <tr>
-      <th
-        scope="col"
-        class="text-nowrap"
-        biSortable="#"
-        [direction]="sortEvent.column === '#' ? sortEvent.direction : ''"
-        (sort$)="onSort($event)">
-        <span class="me-3">#</span>
-      </th>
-      <th
-        *ngFor="let header of headers"
-        scope="col"
-        class="text-nowrap"
-        [biSortable]="header"
-        [direction]="sortEvent.column === header ? sortEvent.direction : ''"
-        (sort$)="onSort($event)">
-        <span class="me-3">{{ header }}</span>
-      </th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let record of records; let i = index">
-      <td scope="row">{{ i + 1 }}</td>
-      <td *ngFor="let header of headers">{{ record[header] }}</td>
-    </tr>
-  </tbody>
-</table>
+<div *ngIf="headers.length && records.length; else noData">
+  <bi-pagination
+    class="mb-2"
+    [page]="paginationEvent.page"
+    [pageSize]="paginationEvent.pageSize"
+    [totalCount]="records.length"
+    (pageInfo$)="onPageChange($event)" />
+  <table
+    class="table table-sm table-bordered border-secondary table-striped table-hover table-responsive">
+    <thead>
+      <tr>
+        <th
+          *ngFor="let header of displayHeaders"
+          scope="col"
+          class="text-nowrap"
+          [biSortable]="header"
+          [direction]="sortEvent.column === header ? sortEvent.direction : ''"
+          (sort$)="onSort($event)">
+          <span>{{ header }}</span>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let record of displayRecords">
+        <td *ngFor="let header of displayHeaders">
+          {{ record[header] }}
+        </td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td *ngFor="let header of displayHeaders; let i = index">
+          <div class="btn-group btn-group-sm" *ngIf="i > 0">
+            <button
+              type="button"
+              class="btn btn-outline-warning"
+              (click)="onRemoveHeader(header)">
+              <i class="bi bi-x-lg"></i>
+            </button>
+            <button type="button" class="btn btn-outline-primary" disabled>
+              <i class="bi bi-funnel"></i>
+            </button>
+          </div>
+        </td>
+      </tr>
+      <tr *ngIf="hiddenHeaders.length">
+        <td [attr.colspan]="displayHeaders.length">
+          <div class="d-flex justify-content-between">
+            <span class="text-muted">
+              The following columns have been hidden:
+              {{ hiddenHeaders.join(', ') }}
+            </span>
+            <button
+              type="button"
+              class="btn btn-outline-primary btn-sm"
+              (click)="updateHeaders()">
+              <i class="bi bi-arrow-counterclockwise"></i>
+            </button>
+          </div>
+        </td>
+      </tr>
+    </tfoot>
+  </table>
+  <bi-pagination
+    class="mb-2"
+    [page]="paginationEvent.page"
+    [pageSize]="paginationEvent.pageSize"
+    [totalCount]="records.length"
+    (pageInfo$)="onPageChange($event)" />
+</div>
 <ng-template #noData>
   <p class="text-center text-muted">No data available</p>
   <p class="text-center text-muted">Please add some data to see it here.</p>
