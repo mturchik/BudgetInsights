@@ -1,9 +1,6 @@
-name: CI
+name: PR Check
 
 on:
-  push:
-    branches:
-      - master
   pull_request:
 
 permissions:
@@ -13,7 +10,6 @@ permissions:
 jobs:
   pr-check:
     runs-on: ubuntu-latest
-    if: github.event_name == 'pull_request'
     steps:
       # Checkout the code
       - uses: actions/checkout@v4
@@ -34,23 +30,3 @@ jobs:
       - run: npx nx affected -t lint,build,test --parallel=3 --configuration=ci
       # Run E2E tests
       - run: npx nx affected -t e2e --parallel=1
-  merge-check:
-    runs-on: ubuntu-latest
-    if: github.event_name != 'pull_request'
-    steps:
-      # Checkout the code
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      # Setup Node.js
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 20
-          cache: 'npm'
-      # Install dependencies
-      - run: npm ci
-      # Configure NX
-      - uses: nrwl/nx-set-shas@v4
-      # Run Lint, Test, and Build
-      - run: npx nx run-many -t lint,build,test --parallel=3 --configuration=ci
-  # TODO: Add job to deploy too GitHub Pages
