@@ -1,9 +1,6 @@
-name: CI
+name: PR Check
 
 on:
-  push:
-    branches:
-      - master
   pull_request:
 
 permissions:
@@ -11,7 +8,7 @@ permissions:
   contents: read
 
 jobs:
-  main:
+  pr-check:
     runs-on: ubuntu-latest
     steps:
       # Checkout the code
@@ -29,9 +26,7 @@ jobs:
       - uses: nrwl/nx-set-shas@v4
       # Update the branch tracking to master for NX affected commands on pull requests
       - run: git branch --track master origin/master
-        if: ${{ github.event_name == 'pull_request' }}
       # Run Lint, Test, and Build
-      - run: npx nx affected -t lint,test,build --parallel=3 --configuration=ci
+      - run: npx nx affected -t lint,build,test --parallel=3 --configuration=ci
       # Run E2E tests
       - run: npx nx affected -t e2e --parallel=1
-  # TODO: Add job to deploy too GitHub Pages
