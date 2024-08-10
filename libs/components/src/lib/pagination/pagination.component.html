@@ -1,0 +1,81 @@
+<div class="row">
+  <div class="col-12 col-sm-8 mb-2 mb-sm-0">
+    <form name="pagination" *ngIf="totalCount">
+      <div class="btn-group btn-group-sm w-100 w-sm-auto">
+        <button
+          type="button"
+          class="btn btn-primary"
+          [class.disabled]="page <= 1"
+          (click)="onPage(1)">
+          <i class="bi bi-chevron-double-left"></i>
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary"
+          [class.disabled]="page <= 1"
+          (click)="onPage(page - 1)">
+          <i class="bi bi-chevron-left"></i>
+        </button>
+
+        <button
+          type="button"
+          class="btn btn-outline-primary text-nowrap"
+          disabled>
+          Page
+        </button>
+        <select
+          class="form-select form-select-sm border-primary rounded-0 border-start-0 border-end-0"
+          name="page"
+          [disabled]="pages.length < 2"
+          [(ngModel)]="page"
+          (ngModelChange)="onPage($event)">
+          <option *ngFor="let page of pages">
+            {{ page }}
+          </option>
+        </select>
+        <button
+          type="button"
+          class="btn btn-outline-primary text-nowrap"
+          disabled>
+          of {{ totalPages }}
+        </button>
+
+        <button
+          type="button"
+          class="btn btn-primary"
+          [class.disabled]="page >= totalPages"
+          (click)="onPage(page + 1)">
+          <i class="bi bi-chevron-right"></i>
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary"
+          [class.disabled]="page >= totalPages"
+          (click)="onPage(totalPages)">
+          <i class="bi bi-chevron-double-right"></i>
+        </button>
+      </div>
+    </form>
+  </div>
+  <div class="col-12 col-sm-4">
+    <form name="pagination" class="d-flex justify-content-end">
+      <div class="btn-group btn-group-sm w-100 w-sm-auto">
+        <select
+          class="form-select form-select-sm border-primary rounded-0 border-end-0"
+          name="pageSize"
+          [(ngModel)]="pageSize"
+          (ngModelChange)="onPageSizeChange($event)">
+          <option *ngFor="let pageSize of pageSizeOptions">
+            {{ pageSize }}
+          </option>
+        </select>
+        <button
+          type="button"
+          class="btn btn-outline-primary text-nowrap"
+          disabled>
+          Items Per Page
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

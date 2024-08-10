@@ -1,0 +1,10 @@
+:host {
+  display: block;
+}
+
+th.sortable {
+  cursor: pointer;
+  &:hover {
+    background-color: var(--bs-light);
+  }
+}
