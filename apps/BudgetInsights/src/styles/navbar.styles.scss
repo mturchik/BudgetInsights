@@ -1,0 +1,19 @@
+.navbar {
+  background-color: var(--bs-secondary-bg);
+
+  .navbar-brand {
+    color: var(--bs-primary);
+    font-weight: $font-weight-medium;
+  }
+
+  .nav-link {
+    color: var(--bs-secondary);
+    font-weight: $font-weight-medium;
+  }
+
+  .navbar-collapse {
+    .navbar-nav {
+      width: 100%;
+    }
+  }
+}

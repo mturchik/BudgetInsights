@@ -1,0 +1,80 @@
+<div *ngIf="headers.length && records.length; else noData">
+  <bi-pagination
+    class="mb-2"
+    *ngIf="paginationLocation === 'top' || paginationLocation === 'both'"
+    [page]="paginationEvent.page"
+    [pageSize]="paginationEvent.pageSize"
+    [totalCount]="records.length"
+    (pageInfo$)="onPageChange($event)" />
+  <table
+    class="table table-sm table-bordered border-secondary table-striped table-hover table-responsive">
+    <thead>
+      <tr>
+        <th *ngIf="title" scope="col" [attr.colspan]="displayHeaders.length">
+          <h5 class="text-center">{{ title }}</h5>
+        </th>
+      </tr>
+      <tr>
+        <th
+          *ngFor="let header of displayHeaders"
+          scope="col"
+          class="text-nowrap"
+          [biSortable]="header"
+          (sort$)="onSort($event)">
+          <span>{{ header }}</span>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let record of displayRecords">
+        <td *ngFor="let header of displayHeaders">
+          {{ record[header] }}
+        </td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td *ngFor="let header of displayHeaders; let i = index">
+          <div class="btn-group btn-group-sm">
+            <button
+              type="button"
+              class="btn btn-warning"
+              (click)="onRemoveHeader(header)">
+              <i class="bi bi-x-lg"></i> Hide
+            </button>
+            <button type="button" class="btn btn-primary" disabled>
+              <i class="bi bi-funnel"></i> Filter
+            </button>
+          </div>
+        </td>
+      </tr>
+      <tr *ngIf="hiddenHeaders.length">
+        <td [attr.colspan]="displayHeaders.length">
+          <div class="d-flex justify-content-between">
+            <span class="text-muted align-content-center">
+              The following columns have been hidden:
+              {{ hiddenHeaders.join(', ') }}
+            </span>
+            <button
+              type="button"
+              class="btn btn-outline-primary btn-sm"
+              (click)="updateHeaders()">
+              <i class="bi bi-arrow-counterclockwise"></i> Reset
+            </button>
+          </div>
+        </td>
+      </tr>
+    </tfoot>
+  </table>
+  <bi-pagination
+    class="mb-2"
+    *ngIf="paginationLocation === 'bottom' || paginationLocation === 'both'"
+    [page]="paginationEvent.page"
+    [pageSize]="paginationEvent.pageSize"
+    [totalCount]="records.length"
+    (pageInfo$)="onPageChange($event)" />
+</div>
+<ng-template #noData>
+  <p class="text-center text-muted">No data available</p>
+  <p class="text-center text-muted">Please add some data to see it here.</p>
+</ng-template>

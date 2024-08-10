@@ -1,14 +1,11 @@
 import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import { NxWelcomeComponent } from './nx-welcome.component';
+import { ShellComponent } from '@budget-insights/shell';
 
 @Component({
   standalone: true,
-  imports: [NxWelcomeComponent, RouterModule],
+  imports: [ShellComponent],
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
-export class AppComponent {
-  title = 'BudgetInsights';
-}
+export class AppComponent {}

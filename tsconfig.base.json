@@ -8,13 +8,22 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "importHelpers": true,
-    "target": "es2015",
+    "target": "es2022",
     "module": "esnext",
-    "lib": ["es2020", "dom"],
+    "lib": ["es2022", "dom"],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@budget-insights/accounts": ["libs/accounts/src/index.ts"],
+      "@budget-insights/components": ["libs/components/src/index.ts"],
+      "@budget-insights/directives": ["libs/directives/src/index.ts"],
+      "@budget-insights/home": ["libs/home/src/index.ts"],
+      "@budget-insights/models": ["libs/models/src/index.ts"],
+      "@budget-insights/services": ["libs/services/src/index.ts"],
+      "@budget-insights/settings": ["libs/settings/src/index.ts"],
+      "@budget-insights/shell": ["libs/shell/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }

@@ -13,8 +13,20 @@
             "allow": [],
             "depConstraints": [
               {
-                "sourceTag": "*",
-                "onlyDependOnLibsWithTags": ["*"]
+                "sourceTag": "scope:application",
+                "onlyDependOnLibsWithTags": ["scope:shell"]
+              },
+              {
+                "sourceTag": "scope:shell",
+                "onlyDependOnLibsWithTags": ["scope:shared", "scope:feature"]
+              },
+              {
+                "sourceTag": "scope:feature",
+                "onlyDependOnLibsWithTags": ["scope:shared"]
+              },
+              {
+                "sourceTag": "scope:shared",
+                "onlyDependOnLibsWithTags": ["scope:shared"]
               }
             ]
           }
@@ -24,7 +36,39 @@
     {
       "files": ["*.ts", "*.tsx"],
       "extends": ["plugin:@nx/typescript"],
-      "rules": {}
+      "rules": {
+        "@typescript-eslint/naming-convention": [
+          "error",
+          {
+            "selector": "memberLike",
+            "modifiers": ["private"],
+            "format": ["camelCase"],
+            "leadingUnderscore": "require"
+          },
+          {
+            "selector": "memberLike",
+            "modifiers": ["public"],
+            "format": ["camelCase"],
+            "leadingUnderscore": "forbid"
+          },
+          {
+            "selector": "memberLike",
+            "modifiers": ["protected"],
+            "format": ["camelCase"],
+            "leadingUnderscore": "forbid"
+          },
+          {
+            "selector": "enumMember",
+            "format": ["camelCase", "PascalCase"]
+          },
+          { "selector": "variableLike", "format": ["camelCase", "PascalCase"] },
+          {
+            "selector": "objectLiteralProperty",
+            "format": ["camelCase", "PascalCase"],
+            "leadingUnderscore": "forbid"
+          }
+        ]
+      }
     },
     {
       "files": ["*.js", "*.jsx"],

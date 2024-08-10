@@ -4,7 +4,7 @@
   "projectType": "application",
   "prefix": "app",
   "sourceRoot": "apps/BudgetInsights/src",
-  "tags": [],
+  "tags": ["scope:application"],
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:application",
@@ -13,7 +13,7 @@
         "outputPath": "dist/apps/BudgetInsights",
         "index": "apps/BudgetInsights/src/index.html",
         "browser": "apps/BudgetInsights/src/main.ts",
-        "polyfills": ["zone.js"],
+        "polyfills": ["zone.js", "@angular/localize/init"],
         "tsConfig": "apps/BudgetInsights/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
         "assets": [

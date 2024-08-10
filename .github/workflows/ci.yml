@@ -27,8 +27,9 @@ jobs:
       - run: npm ci
       # Configure NX
       - uses: nrwl/nx-set-shas@v4
-      # Update the branch tracking to master for NX affected commands
+      # Update the branch tracking to master for NX affected commands on pull requests
       - run: git branch --track master origin/master
+        if: ${{ github.event_name == 'pull_request' }}
       # Run Lint, Test, and Build
       - run: npx nx affected -t lint,test,build --parallel=3 --configuration=ci
       # Run E2E tests
